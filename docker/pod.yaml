@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-k8s
+spec:
+  containers:
+  - name: app-container
+    image: dienaya/app-k8s:1.0
+    ports:
+    - containerPort: 3000
+  imagePullSecrets:
+  - name: my-dockerhub-secret
