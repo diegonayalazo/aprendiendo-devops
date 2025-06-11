@@ -22,3 +22,7 @@ export INGRESS_IP=4.156.71.104
 echo "$INGRESS_IP demo.local" | sudo tee -a /etc/hosts
 
 curl -k https://demo.local
+
+openssl s_client -connect demo.local:443
+openssl s_client -connect demo.local:443 -servername demo.local </dev/null 2>/dev/null | openssl x509 -noout -dates
+openssl s_client -connect www.google.com:443 -servername www.google.com -showcerts
