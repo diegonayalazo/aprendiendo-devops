@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-debugger
+spec:
+  containers:
+  - name: debugger
+    image: busybox
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - mountPath: /data
+      name: azure-volume
+  volumes:
+  - name: azure-volume
+    persistentVolumeClaim:
+      claimName: nginx-pvc
+  restartPolicy: Never
