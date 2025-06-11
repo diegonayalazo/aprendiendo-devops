@@ -1,0 +1,19 @@
+---
+- name: Instalar Apache en servidores web
+  hosts: servidores_web
+  become: true  # Para ejecutar tareas con privilegios de superusuario
+  tasks:
+    - name: Actualizar el caché de apt
+      apt:
+        update_cache: yes
+
+    - name: Instalar apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Asegurar que Apache esté iniciado y habilitado
+      service:
+        name: apache2
+        state: started
+        enabled: yes
