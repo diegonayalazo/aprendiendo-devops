@@ -1,0 +1,6 @@
+terraform.tfstate
+terraform.tfstate.*
+.terraform
+.terraform.lock.hcl
+tls.key
+tls.crt
