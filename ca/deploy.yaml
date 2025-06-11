@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  labels:
+    app: load-generator
+    env: test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+      - name: stress
+        image: progrium/stress
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        command: ["stress"]
+        args: ["--cpu", "2", "--io", "1", "--vm", "1", "--vm-bytes", "128M", "--timeout", "300s"]
