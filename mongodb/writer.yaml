@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-writer
+  namespace: data
+spec:
+  restartPolicy: Never
+  containers:
+    - name: mongo-client
+      image: mongo
+      command: [ "sh", "-c" ]
+      args:
+        - |
+          sleep 5;
+          echo 'Insertando documento...';
+          mongo "mongodb://myuser:mypassword@mongodb.data.svc.cluster.local:27017/mydatabase" \
+            --eval 'db.ejemplo.insertOne({nombre: "Juan", edad: 30})'

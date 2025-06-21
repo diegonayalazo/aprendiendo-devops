@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sender
+  namespace: messaging
+spec:
+  containers:
+    - name: sender
+      image: python:3.10
+      command: ["sh", "-c"]
+      args:
+        - |
+          pip install pika && \
+          python -c "
+          import pika
+          conn = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq.messaging.svc.cluster.local', credentials=pika.PlainCredentials('user', 'bitnami')))
+          ch = conn.channel()
+          ch.queue_declare(queue='test')
+          ch.basic_publish(exchange='', routing_key='test', body='¡Hola desde sender!')
+          print('Mensaje enviado')
+          conn.close()
+          "
