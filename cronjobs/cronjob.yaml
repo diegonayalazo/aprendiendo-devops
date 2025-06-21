@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: say-the-time
+  namespace: default
+spec:
+  schedule: "* * * * *"  # Cada minuto
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: say-the-time
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - "date; echo '¡Hora actual mostrada!'"
+          restartPolicy: OnFailure

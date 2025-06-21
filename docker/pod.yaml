@@ -8,5 +8,6 @@ spec:
     image: dienaya/app-k8s:1.0
     ports:
     - containerPort: 3000
+    imagePullPolicy: Always
   imagePullSecrets:
   - name: my-dockerhub-secret
