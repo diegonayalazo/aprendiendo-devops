@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  subscription_id = "fdac5f1c-c4c4-4d74-b6fc-63d873cc43dd" 
+  subscription_id = "" #llenar
 }
 
 resource "azurerm_network_security_group" "nsg" {
